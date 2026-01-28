@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "wdio run ./wdio.conf.ts",
+    "start:spec": "npx wdio run ./wdio.conf.ts --spec",
     "start:report": "wdio run ./wdio.conf.ts && allure generate --clean && allure open",
     "report:gen": "allure generate --clean",
     "report:open": "allure open",

@@ -8,10 +8,6 @@ export class ShopPage extends GeneralPage {
     await browser.maximizeWindow();
   }
 
-  get title() {
-    return $("h1.title");
-  }
-
   async getProducts(): Promise<Product[]> {
     const products: Product[] = [];
     const productList = await $(".products").$$(".product").getElements();

@@ -2,6 +2,10 @@ import { BasePage } from "@pages/base.page";
 import { $ } from "@wdio/globals";
 
 export abstract class GeneralPage extends BasePage {
+  get title() {
+    return $("h1.title");
+  }
+
   get contactPhone() {
     return $("#header")
       .$(".header-wrapper")
@@ -48,7 +52,7 @@ export abstract class GeneralPage extends BasePage {
     const acceptBtn = $("#cookie-notice").$(".*=ok");
     await acceptBtn.waitForExist({ timeout: 10_000 });
 
-    if (await acceptBtn.isClickable()) {
+    if (await acceptBtn.isExisting()) {
       await acceptBtn.click();
     }
   }
@@ -67,5 +71,24 @@ export abstract class GeneralPage extends BasePage {
     await searchTextbox.setValue(keyword);
 
     await searchBtn.click();
+  }
+
+  get categoryMenu() {
+    return $(".header-secondary-menu");
+  }
+
+  async hoverCategoryMenu() {
+    await this.categoryMenu.waitForDisplayed();
+    await this.categoryMenu.moveTo();
+  }
+
+  getCategoryItemLink(categoryName: string) {
+    return this.categoryMenu.$(`a.*=${categoryName}`);
+  }
+
+  async navigateToCategoryPage(categoryName: string) {
+    const categoryItem = this.getCategoryItemLink(categoryName);
+
+    await categoryItem.click();
   }
 }
