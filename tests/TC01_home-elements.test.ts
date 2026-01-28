@@ -2,7 +2,7 @@ import { expect } from "@wdio/globals";
 import { HomePage } from "@pages/home.page";
 import test from "node:test";
 import allure from "@wdio/allure-reporter";
-import { stringifyWithRegex } from "@utils/common.utils";
+import { reportTestData } from "@utils/common.utils";
 
 test.describe(async () => {
   const homePage = new HomePage();
@@ -14,11 +14,7 @@ test.describe(async () => {
   };
 
   it("TC01_Verify Homepage Elements Are Visible", async () => {
-    await allure.addAttachment(
-      "Test Data",
-      stringifyWithRegex(TestData),
-      "application/json",
-    );
+    await reportTestData(TestData);
 
     await allure.step(
       "1. Navigate to https://demo.testarchitect.com",

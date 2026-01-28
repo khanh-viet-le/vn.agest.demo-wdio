@@ -52,4 +52,20 @@ export abstract class GeneralPage extends BasePage {
       await acceptBtn.click();
     }
   }
+
+  async search(keyword: string, categoryName?: string) {
+    const header = $("#header").$(".header-wrapper").$(".header-main");
+    const cateMenu = header.$("select[name=product_cat]");
+    const searchTextbox = header.$("input[type=text]");
+    const searchBtn = header.$("button.search-button");
+
+    if (categoryName) {
+      await cateMenu.click();
+      await cateMenu.selectByVisibleText(categoryName);
+    }
+
+    await searchTextbox.setValue(keyword);
+
+    await searchBtn.click();
+  }
 }

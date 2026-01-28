@@ -1,3 +1,5 @@
+import allure from "@wdio/allure-reporter";
+
 export function stringifyWithRegex(obj: unknown): string {
   return JSON.stringify(
     obj,
@@ -12,5 +14,13 @@ export function stringifyWithRegex(obj: unknown): string {
       return value;
     },
     2,
+  );
+}
+
+export async function reportTestData(obj: unknown) {
+  await allure.addAttachment(
+    "Test Data",
+    stringifyWithRegex(obj),
+    "application/json",
   );
 }

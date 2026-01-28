@@ -1,5 +1,8 @@
-const BASE_URL = "https://demo.testarchitect.com";
+import { config } from "@config";
 
-export enum Route {
-  HOME = BASE_URL + "/",
-}
+const BASE_URL = config.baseUrl ?? "";
+
+export const Route = {
+  HOME: BASE_URL,
+  SHOP: BASE_URL + "/shop",
+};
