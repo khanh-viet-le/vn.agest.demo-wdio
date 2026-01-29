@@ -99,7 +99,7 @@ export abstract class GeneralPage extends BasePage {
   }
 
   get cartButton() {
-    return $(".header-wrapper .et_b_header-cart");
+    return $("#header").$(".header-wrapper").$(".et_b_header-cart");
   }
 
   async getCartCount() {
