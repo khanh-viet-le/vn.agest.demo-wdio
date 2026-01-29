@@ -1,4 +1,4 @@
-import { GeneralPage } from "./general.page";
+import { GeneralPage } from "@pages/general.page";
 
 export class ProductPage extends GeneralPage {
   open(): Promise<void> {

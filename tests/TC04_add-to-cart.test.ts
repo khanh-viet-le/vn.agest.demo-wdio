@@ -13,6 +13,7 @@ test.describe(async () => {
     selectedProduct: {
       title: "Bose SoundLink Mini",
     },
+    message: /success|added/i,
   };
 
   it("TC04_Verify Product Can Be Added to Shopping Cart", async () => {
@@ -42,7 +43,7 @@ test.describe(async () => {
 
     await allure.step("4. Verify cart notification", async () => {
       await allure.step("- Success message should appear", async () => {
-        await expect(productPage.alertMessage).toHaveText(/success|added/i);
+        await expect(productPage.alertMessage).toHaveText(TestData.message);
       });
     });
 
