@@ -72,6 +72,12 @@ export const config: WebdriverIO.Config = {
     timeout: 60000,
   },
 
+  before: async () => {
+    if (!process.env.CI) {
+      await browser.maximizeWindow();
+    }
+  },
+
   afterTest: async function ({ error }) {
     if (error) {
       await browser.takeScreenshot();

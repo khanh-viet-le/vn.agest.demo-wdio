@@ -6,7 +6,6 @@ import { extractNumbers } from "@utils/extractor.utils";
 export class ShopPage extends GeneralPage {
   async open() {
     await browser.url(Route.SHOP);
-    await browser.maximizeWindow();
   }
 
   async getProducts(): Promise<Array<[WebdriverIO.Element, Product]>> {
