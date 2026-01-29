@@ -131,4 +131,8 @@ export abstract class GeneralPage extends BasePage {
 
     return result;
   }
+
+  async naviageToCartPage() {
+    await this.cartButton.click();
+  }
 }

@@ -34,9 +34,10 @@ test.describe(async () => {
     await productPage.addToCart();
     const oldCartTotal = (await productPage.getCartTotal()) ?? 0;
 
-    await allure.step("1. Navigate to Cart page", async () => {
-      await productPage.cartButton.click();
-    });
+    await allure.step(
+      "1. Navigate to Cart page",
+      productPage.naviageToCartPage,
+    );
 
     await allure.addStep("2. Locate quantity field");
     await allure.addStep(
