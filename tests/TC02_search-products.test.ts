@@ -65,7 +65,7 @@ test.describe(async () => {
 
           expect(
             products.every((product) =>
-              new RegExp(TestData.searchKeyword, "i").test(product.title),
+              new RegExp(TestData.searchKeyword, "i").test(product[1].title),
             ),
           ).toBeTruthy();
         },

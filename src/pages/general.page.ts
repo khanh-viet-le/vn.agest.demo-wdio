@@ -1,5 +1,7 @@
 import { BasePage } from "@pages/base.page";
 import { $ } from "@wdio/globals";
+import { extractNumbers } from "@utils/extractor.utils";
+import { Product } from "@models/product.model";
 
 export abstract class GeneralPage extends BasePage {
   get title() {
@@ -90,5 +92,43 @@ export abstract class GeneralPage extends BasePage {
     const categoryItem = this.getCategoryItemLink(categoryName);
 
     await categoryItem.click();
+  }
+
+  async navigateToPageInMenu(menuItem: string) {
+    await this.getMenuItemLink(menuItem).click();
+  }
+
+  get cartButton() {
+    return $(".header-wrapper .et_b_header-cart");
+  }
+
+  async getCartCount() {
+    const rawText = await this.cartButton.$(".et-cart-quantity").getText();
+
+    return extractNumbers(rawText).pop();
+  }
+
+  async getCartTotal() {
+    const rawText = await this.cartButton.$(".et-cart-total").getText();
+
+    return extractNumbers(rawText).pop();
+  }
+
+  async getInCartProducts(): Promise<Array<[WebdriverIO.Element, Product]>> {
+    const result: Array<[WebdriverIO.Element, Product]> = [];
+    const productList = await this.cartButton
+      .$$(".cart-widget-products")
+      .getElements();
+
+    for (const productElement of productList) {
+      const product = new Product();
+      product.title = (
+        await productElement.$(".product-title").getText()
+      ).trim();
+
+      result.push([productElement, product]);
+    }
+
+    return result;
   }
 }
